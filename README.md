@@ -2,6 +2,8 @@
 
 Purpose of this sample app is to update answer to a [StackOverflow question](https://stackoverflow.com/questions/45013284/how-can-i-test-routerlinkactive-in-angular) about how to test apps using [Angular's `RouterLinkActive` directive](https://angular.dev/api/router/RouterLinkActive)
 
+You can find an alternative solution that couples to the `RouterLink` directive APIs in [a separate branch](https://github.com/davidlj95/angular-routerlinkactive-testing/tree/using-router-directives)
+
 TODO: Add answer link
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.

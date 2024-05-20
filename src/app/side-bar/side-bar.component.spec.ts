@@ -36,25 +36,24 @@ describe('SideBarComponent', () => {
   });
 
   it('can link to main pages', () => {
-    const routerLinkElements = fixture.debugElement.queryAll(By.directive(RouterLink));
-    const routerLinks = routerLinkElements.map(element => element.injector.get(RouterLink));
+    const anchorElements = fixture.debugElement.queryAll(By.css('a'));
 
-    expect(routerLinks.length).withContext('should have 2 links').toBe(2);
-    expect(routerLinks[0]?.urlTree?.toString()).withContext('1st link should go to Home').toBe('/');
-    expect(routerLinks[1]?.urlTree?.toString()).withContext('2nd link should go to Edit').toBe('/edit');
+    expect(anchorElements.length).withContext('should have 2 links').toBe(2);
+    expect(anchorElements[0]?.attributes['href']).withContext('1st link should go to Home').toBe('/');
+    expect(anchorElements[1]?.attributes['href']).withContext('2nd link should go to Edit').toBe('/edit');
   });
 
   it('can show the active link', async () => {
     let routerTestingHarness: RouterTestingHarness
     await fixture.ngZone?.run(async () => routerTestingHarness = await RouterTestingHarness.create('/'))
-    let activeLinks = fixture.debugElement.queryAll(By.css('.active')).map((element) => element.injector.get(RouterLink))
+    let activeLinks = fixture.debugElement.queryAll(By.css('.active'))
 
     expect(activeLinks.length).withContext('should only have 1 active link').toBe(1);
-    expect(activeLinks[0]?.urlTree?.toString()).withContext('active link should be for Home').toBe('/');
+    expect(activeLinks[0]?.attributes['href']).withContext('active link should be for Home').toBe('/');
 
     await fixture.ngZone?.run(async () => routerTestingHarness.navigateByUrl('/edit'))
-    activeLinks = fixture.debugElement.queryAll(By.css('.active')).map(element => element.injector.get(RouterLink));
+    activeLinks = fixture.debugElement.queryAll(By.css('.active'))
     expect(activeLinks.length).withContext('should only have 1 active link after navigating').toBe(1);
-    expect(activeLinks[0]?.urlTree?.toString()).withContext('active link should be for Edit').toBe('/edit');
+    expect(activeLinks[0]?.attributes['href']).withContext('active link should be for Edit').toBe('/edit');
   });
 });
